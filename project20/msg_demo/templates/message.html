@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .debug{color:rgb(209, 212, 16)}
+        .info{color:blue}
+        .success{color:green}
+        .warning{color:red}
+        .error{color:rgb(131, 61, 61)}
+    </style>
+</head>
+<body>
+    <h1>message data</h1>
+    {% if messages %}
+    <ul>
+        {% for message in messages %}
+        <li class="{{message.tags}}">{{message}}</li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>No message:</p>
+    {% endif %}
+</body>
+</html>
