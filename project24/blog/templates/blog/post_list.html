@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog posts</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
+
+        :root {
+            --ink: #17232d;
+            --muted: #66737d;
+            --paper: #f5f7f4;
+            --surface: #ffffff;
+            --line: #dfe6e1;
+            --accent: #d75a3d;
+            --accent-dark: #a63f2c;
+            --teal: #1f6d6b;
+            --shadow: 0 18px 45px rgba(23, 35, 45, 0.09);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            margin: 0;
+            color: var(--ink);
+            background-color: var(--paper);
+            background-image: linear-gradient(rgba(31, 109, 107, 0.045) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(31, 109, 107, 0.045) 1px, transparent 1px);
+            background-size: 32px 32px;
+            font-family: 'DM Sans', sans-serif;
+        }
+
+        main {
+            width: min(920px, calc(100% - 40px));
+            margin: 0 auto;
+            padding: 72px 0 56px;
+        }
+
+        .page-header {
+            display: flex;
+            align-items: end;
+            justify-content: space-between;
+            gap: 24px;
+            margin-bottom: 34px;
+            animation: rise-in 0.55s ease both;
+        }
+
+        .eyebrow {
+            margin: 0 0 10px;
+            color: var(--accent);
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            margin: 0;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2.5rem, 6vw, 4.8rem);
+            line-height: 0.98;
+            letter-spacing: 0;
+        }
+
+        .intro {
+            max-width: 260px;
+            margin: 0;
+            color: var(--muted);
+            font-size: 0.98rem;
+            line-height: 1.6;
+            text-align: right;
+        }
+
+        .posts {
+            display: grid;
+            gap: 16px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .post {
+            position: relative;
+            overflow: hidden;
+            padding: 26px 30px 28px;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            background: var(--surface);
+            box-shadow: var(--shadow);
+            animation: rise-in 0.55s ease both;
+        }
+
+        .post::before {
+            position: absolute;
+            inset: 0 auto 0 0;
+            width: 5px;
+            content: '';
+            background: var(--teal);
+        }
+
+        .post:nth-child(2)::before { background: var(--accent); }
+        .post:nth-child(3)::before { background: #d6a62d; }
+        .post:nth-child(4)::before { background: #5e7890; }
+        .post:nth-child(2) { animation-delay: 0.08s; }
+        .post:nth-child(3) { animation-delay: 0.16s; }
+        .post:nth-child(4) { animation-delay: 0.24s; }
+
+        .post-title {
+            margin: 0 0 10px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.35rem;
+            line-height: 1.2;
+        }
+
+        .post-content {
+            margin: 0;
+            color: var(--muted);
+            line-height: 1.7;
+        }
+
+        .empty-state {
+            padding: 34px;
+            border: 1px dashed var(--line);
+            border-radius: 8px;
+            color: var(--muted);
+            text-align: center;
+        }
+
+        .pagination {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 34px;
+        }
+
+        .pagination a,
+        .pagination .current {
+            display: inline-flex;
+            min-width: 42px;
+            height: 42px;
+            align-items: center;
+            justify-content: center;
+            padding: 0 14px;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            background: var(--surface);
+            color: var(--ink);
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+        }
+
+        .pagination a:hover {
+            border-color: var(--accent);
+            background: #fff5f1;
+            color: var(--accent-dark);
+            transform: translateY(-2px);
+        }
+
+        .pagination .current {
+            border-color: var(--teal);
+            background: var(--teal);
+            color: #ffffff;
+        }
+
+        @keyframes rise-in {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 640px) {
+            main {
+                width: min(100% - 24px, 560px);
+                padding: 42px 0 36px;
+            }
+
+            .page-header {
+                display: block;
+                margin-bottom: 26px;
+            }
+
+            .intro {
+                max-width: 320px;
+                margin-top: 16px;
+                text-align: left;
+            }
+
+            .post {
+                padding: 22px 22px 24px;
+            }
+
+            .pagination a,
+            .pagination .current {
+                min-width: 38px;
+                height: 38px;
+                padding: 0 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main>
+      <header class="page-header">
+        <div>
+            <p class="eyebrow">The journal</p>
+            <h1>Blog posts</h1>
+        </div>
+        <p class="intro">Thoughts, notes, and useful ideas gathered in one place.</p>
+      </header>
+    <ul class="posts">
+        {% for post in page_obj %}
+        <li class="post">
+            <h2 class="post-title">{{ post.title }}</h2>
+            <p class="post-content">{{ post.content }}</p>
+        </li>
+        {% empty %}
+        <li class="empty-state">No posts have been published yet.</li>
+        {% endfor %}
+    </ul>
+    <nav class="pagination" aria-label="Blog pagination">
+     {% if page_obj.has_previous %}
+     <a href="?page=1">First</a>
+     <a href="?page={{page_obj.previous_page_number}}">Previous</a>
+     {% endif %}
+     {% for num in page_obj.paginator.page_range %}
+      {% if page_obj.number == num %}
+         <span class="current">{{num}}</span>
+        {% else %}
+         <a href="?page={{num}}">{{num}}</a>
+        {% endif %}
+      {% endfor %}
+      {% if page_obj.has_next %}
+        <a href="?page={{page_obj.next_page_number}}">next</a>
+        <a href="?page={{page_obj.paginator.num_pages}}">last</a>
+       {% endif %}
+    </nav>
+    </main>
+</body>
+</html>
