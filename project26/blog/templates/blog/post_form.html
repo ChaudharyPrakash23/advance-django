@@ -1,0 +1,12 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+<h2>{% if form.instance.pk %}Edit post {% else %} New post {% endif %}</h2>
+<form method="post" class="mt-3">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-success">Save</button>
+    <a href="{% url 'post_list' %}" class="btn btn-secondary">Cancel</a>
+</form>
+
+{% endblock %}
